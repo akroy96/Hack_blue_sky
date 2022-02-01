@@ -1,0 +1,9 @@
+References
+
+https://towardsdatascience.com/a-complete-guide-to-time-series-data-visualization-in-python-da0ddd2cfb01
+
+https://stats.stackexchange.com/questions/350871/removing-gaussian-noise-from-a-time-series-data
+https://towardsdatascience.com/time-series-smoothing-for-better-forecasting-7fbf10428b2
+https://github.com/nachi-hebbar/Multivariate-Time-Series-Forecasting/blob/main/VAR_Model%20(1).ipynb
+https://github.com/bnsreenu/python_for_microscopists/blob/master/164b-Intro_to_time_series_Forecasting_using_feed_forward_NN_and_TimeseriesGenerator.py
+https://github.com/krishnaik06/ARIMA-And-Seasonal-ARIMA/blob/master/Untitled.ipynb

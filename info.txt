@@ -1,0 +1,11 @@
+This file contains information about is hackathon at a quick disposal 
+
+This is a Time Series Application 
+
+Online / incremental Machine Learning
+
+Concept drift.
+
+## to write what all learn't
+
+Creme model.fit_one

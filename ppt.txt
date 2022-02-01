@@ -1,0 +1,14 @@
+What can be done ?
+For custom Deep Learning models I have used only 3 day history and 1 day future.
+We can try 1 day,2 day and 4 day history
+Most of the time last 24 points also considered by padding them with edge value.
+When I find what fraction of data is being padding I find that 24 out of 96 are being padded that is  1/4th of that data is valued wrong that can be removed in future.
+
+Most of the models are trained and tested only on CO can be done on both datas
+
+Hyper parameter tuning can be done.
+
+
+Findings 
+
+

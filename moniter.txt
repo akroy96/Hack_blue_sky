@@ -1,0 +1,170 @@
+Date : 30 jan
+model : only on CO(GT) online training
+```from sktime.forecasting.tbats import TBATS
+
+forecaster = TBATS(
+    use_box_cox=True,
+    use_trend=True,
+    use_damped_trend=True,
+    sp=24,
+    use_arma_errors=True,
+    n_jobs=-1)
+```
+
+Performance : 
+0) MAPE : 0.2254754801043126 
+1) MAPE : 0.2534624721646063 
+2) MAPE : 0.24567967033405905 
+3) MAPE : 0.32340945923301007 
+4) MAPE : 0.3335450712166627 
+5) MAPE : 0.37007458282478806 
+6) MAPE : 0.30929219078728465 
+0.29441984666638904
+
+Model : only on 'T' online training
+forecaster_t = TBATS(
+        use_box_cox=True,
+        use_trend=True,
+        use_damped_trend=True,
+        sp=24,
+        use_arma_errors=True,
+        n_jobs=-1)
+
+Performance:
+0) MAPE : 0.1985839236698512 
+1) MAPE : 0.14308714719617463 
+2) MAPE : 0.12555856534225102 
+3) MAPE : 0.1852899841161618 
+4) MAPE : 0.30906397106581435 
+5) MAPE : 0.3312316204393503 
+6) MAPE : 0.3573996218472952 
+0.23574497623955692
+
+
+Model : only on CO(GT) retraining
+model_nbeats = NBEATSModel(
+    input_chunk_length=72,
+    output_chunk_length=24,
+    generic_architecture=True,
+    num_blocks=3,
+    num_layers=4,
+    layer_widths=256,
+    n_epochs=15,
+    nr_epochs_val_period=1,
+    batch_size=1,
+    model_name="nbeats_interpretable_run",
+)
+
+Performance:
+NBEATS MAPE : 0.2962881741041617
+NBEATS MAPE : 1.1748429852085802
+NBEATS MAPE : 0.3440083010495673
+NBEATS MAPE : 0.36616102787340327
+NBEATS MAPE : 0.3618298929876255
+NBEATS MAPE : 0.3418909079877896
+NBEATS MAPE : 0.276045118337424
+0.4515809153640788
+
+
+Model : only co online Training
+dense(128)
+dense(128)
+
+Performance:
+0) MAPE : 0.374021742812541 
+1) MAPE : 1.3837545142486227 
+2) MAPE : 0.3258291000688404 
+3) MAPE : 0.8309873783331837 
+4) MAPE : 0.5293998972220025 
+5) MAPE : 1.26868310672043 
+6) MAPE : 0.9054110996997177 
+0.8025838341579055
+
+model : only on CO online training
+model = Sequential()
+model.add(Bidirectional(LSTM(128,input_shape=(72,1),return_sequences=True)))
+model.add(Bidirectional(LSTM(128,return_sequences=True)))
+model.add(tf.keras.layers.Flatten())
+model.add(Dense(24))
+model.compile(loss='mean_absolute_error', optimizer='adam', metrics = ['acc','mape'])
+
+Performance:
+0) MAPE : 0.5633842591064825 
+1) MAPE : 0.4129096559522782 
+2) MAPE : 0.29216110684118174 
+3) MAPE : 0.5031667065886993 
+4) MAPE : 0.4441272054193279 
+5) MAPE : 1.217630209688216 
+6) MAPE : 0.5089461786064211 
+0.5631893317432295
+
+model : 
+i = Input(shape=(history,1))
+model = (Bidirectional(LSTM(128,return_sequences=True)))(i)
+hl_1 = (Bidirectional(LSTM(128,return_sequences=True)))(model)
+con_l = (tf.keras.layers.concatenate((hl_1,model)))
+hl_2 = (Bidirectional(LSTM(128,return_sequences=True)))(con_l)
+hl_3 = (Bidirectional(LSTM(128,return_sequences=True)))(hl_2)
+con_l = (tf.keras.layers.concatenate((hl_3,hl_2)))
+hl_4 = (Bidirectional(LSTM(64,return_sequences=True,)))(con_l)
+hl_5 = (Bidirectional(LSTM(64,return_sequences=True,kernel_regularizer='l1')))(hl_4)
+con_l = (tf.keras.layers.concatenate((hl_5,hl_4)))
+model = (tf.keras.layers.Flatten())(con_l)
+model = (Dense(24))(model)
+model = Model([i],model)
+model.compile(loss='mean_absolute_error', optimizer='adam', metrics = ['acc','mape'])
+
+Performance : 
+0) MAPE : 0.3784105445129544 
+1) MAPE : 0.5483015568600537 
+2) MAPE : 2.8234459586357796 
+3) MAPE : 0.3805517384781442 
+4) MAPE : 0.4925389307578736 
+5) MAPE : 0.33458097946807436 
+6) MAPE : 0.38533459763616773 
+0.7633091866212924
+
+Performance: retraining
+0) MAPE : 0.3784105445129544 
+1) MAPE : 0.48808192097959086 
+2) MAPE : 0.2120832912252387 
+3) MAPE : 0.37173326498055065 
+4) MAPE : 0.41678433309703494 
+5) MAPE : 0.40247365030042026 
+6) MAPE : 0.3799207522194566 
+0.37849825104503526
+
+Model : ResLSTM1DCONV
+Performance : 
+0) MAPE : 0.2612480986372257 
+1) MAPE : 0.7862975652538147 
+2) MAPE : 0.6821195944117967 
+3) MAPE : 0.3659187254233051 
+4) MAPE : 0.4080404268855795 
+5) MAPE : 0.20545611321880022 
+6) MAPE : 0.30892631925893715 
+0.43114383472706563
+
+Performance : retraining
+0) MAPE : 0.2612480986372257 
+1) MAPE : 0.19584675765475978 
+2) MAPE : 0.29740090805011327 
+3) MAPE : 0.35090848737245084 
+4) MAPE : 0.468087852723954 
+5) MAPE : 0.475849836934235 
+6) MAPE : 0.3357313233659929 
+0.3407247521055331
+
+Model : NBEATS on T
+Performance : 
+0.8593
+
+Performance : retraining
+NBEATS MAPE : 0.28031029541347496
+NBEATS MAPE : 0.18458946826565445
+NBEATS MAPE : 0.42835441211896885
+NBEATS MAPE : 0.3134407476730923
+0.3417
+0.3372
+NBEATS MAPE : 0.35
+0.32
